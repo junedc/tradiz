@@ -1,9 +1,182 @@
 @import 'tailwindcss';
+@source '../views/**/*.blade.php';
+@source './**/*.{js,vue}';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Inter', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+    --color-brand-50: #ecfeff;
+    --color-brand-100: #cffafe;
+    --color-brand-700: #0f766e;
+    --color-brand-900: #134e4a;
+}
+
+:root {
+    color-scheme: light;
+    --app-bg: #edf4f8;
+    --app-bg-accent: rgba(14, 116, 144, 0.14);
+    --app-bg-secondary: #f8fafc;
+    --surface-primary: rgba(255, 255, 255, 0.86);
+    --surface-secondary: #ffffff;
+    --surface-muted: #f8fafc;
+    --surface-strong: #0f172a;
+    --border-subtle: rgba(226, 232, 240, 0.95);
+    --border-strong: rgba(255, 255, 255, 0.8);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --text-inverse: #f8fafc;
+    --brand-accent: #0f766e;
+    --brand-soft: #ecfeff;
+    --brand-border: #bae6fd;
+    --error-soft: #fff1f2;
+    --error-border: #fecdd3;
+    --error-text: #e11d48;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+        --app-bg: #020617;
+        --app-bg-accent: rgba(34, 211, 238, 0.18);
+        --app-bg-secondary: #0f172a;
+        --surface-primary: rgba(15, 23, 42, 0.88);
+        --surface-secondary: #111827;
+        --surface-muted: #1e293b;
+        --surface-strong: #020617;
+        --border-subtle: rgba(71, 85, 105, 0.9);
+        --border-strong: rgba(51, 65, 85, 0.9);
+        --text-primary: #e2e8f0;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --text-inverse: #e2e8f0;
+        --brand-accent: #67e8f9;
+        --brand-soft: rgba(8, 145, 178, 0.18);
+        --brand-border: rgba(34, 211, 238, 0.28);
+        --error-soft: rgba(127, 29, 29, 0.2);
+        --error-border: rgba(251, 113, 133, 0.35);
+        --error-text: #fda4af;
+    }
+}
+
+html,
+body,
+#app {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background:
+        radial-gradient(circle at top left, var(--app-bg-accent), transparent 40%),
+        linear-gradient(180deg, var(--app-bg-secondary) 0%, var(--app-bg) 100%);
+    color: var(--text-primary);
+}
+
+.app-surface {
+    background: var(--surface-primary);
+    border-color: var(--border-strong);
+    color: var(--text-primary);
+}
+
+.app-surface-muted {
+    background: var(--surface-muted);
+    border-color: var(--border-subtle);
+    color: var(--text-primary);
+}
+
+.app-panel-strong {
+    background: var(--surface-strong);
+    color: var(--text-inverse);
+}
+
+.app-text-primary {
+    color: var(--text-primary);
+}
+
+.app-text-secondary {
+    color: var(--text-secondary);
+}
+
+.app-text-muted {
+    color: var(--text-muted);
+}
+
+.app-brand-text {
+    color: var(--brand-accent);
+}
+
+.app-brand-surface {
+    background: var(--brand-soft);
+    border-color: var(--brand-border);
+}
+
+.app-error-surface {
+    background: var(--error-soft);
+    border-color: var(--error-border);
+}
+
+.app-error-text {
+    color: var(--error-text);
+}
+
+.p-inputtext,
+.p-select,
+.p-inputnumber-input,
+.p-datepicker-input,
+.p-textarea {
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-subtle);
+}
+
+.p-inputtext::placeholder,
+.p-inputnumber-input::placeholder,
+.p-datepicker-input::placeholder,
+.p-textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.p-inputtext:enabled:hover,
+.p-select:not(.p-disabled):hover,
+.p-inputnumber:not(.p-disabled):hover .p-inputnumber-input,
+.p-datepicker:not(.p-disabled):hover .p-datepicker-input,
+.p-textarea:enabled:hover {
+    border-color: var(--brand-border);
+}
+
+.p-select-label,
+.p-datepicker-dropdown,
+.p-inputnumber-button,
+.p-select-dropdown {
+    color: var(--text-secondary);
+}
+
+.p-checkbox-box {
+    background: var(--surface-secondary);
+    border-color: var(--border-subtle);
+}
+
+.app-data-table .p-datatable-header-cell,
+.app-data-table .p-datatable-thead > tr > th {
+    background: var(--surface-muted);
+    color: var(--text-primary);
+    border-color: var(--border-subtle);
+}
+
+.app-data-table .p-datatable-tbody > tr > td {
+    background: var(--surface-primary);
+    color: var(--text-secondary);
+    border-color: var(--border-subtle);
+}
+
+.app-data-table .p-paginator {
+    background: var(--surface-primary);
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-subtle);
 }
