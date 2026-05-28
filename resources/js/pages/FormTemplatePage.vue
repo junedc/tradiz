@@ -130,6 +130,27 @@
                                 test-id="gallery-images-upload"
                             />
                         </div>
+
+                        <div class="md:col-span-2">
+                            <div class="app-surface-muted rounded-[1.5rem] border p-4">
+                                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                    <div>
+                                        <p class="app-text-primary text-sm font-semibold">
+                                            Reusable Dialog
+                                        </p>
+                                        <p class="app-text-secondary mt-1 text-sm">
+                                            PrimeVue already has a solid modal dialog, so we can wrap it once and reuse the same API everywhere.
+                                        </p>
+                                    </div>
+                                    <Button
+                                        type="button"
+                                        label="Open Dialog"
+                                        icon="pi pi-window-maximize"
+                                        @click="isDialogOpen = true"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -179,12 +200,44 @@
             </div>
         </section>
     </AppLayout>
+
+    <AppDialog
+        v-model:visible="isDialogOpen"
+        title="Edit Quote Details"
+        description="This reusable dialog is a good fit for quick-edit forms, confirmations, and focused workflows."
+        confirm-label="Save Changes"
+        @confirm="isDialogOpen = false"
+    >
+        <div class="grid gap-4 md:grid-cols-2">
+            <TextField
+                v-model="dialogForm.customer"
+                label="Customer"
+                placeholder="Jane Smith"
+                test-id="dialog-customer-input"
+            />
+            <TextField
+                v-model="dialogForm.reference"
+                label="Reference"
+                placeholder="Q-1024"
+                test-id="dialog-reference-input"
+            />
+            <div class="md:col-span-2">
+                <TextareaField
+                    v-model="dialogForm.notes"
+                    label="Internal Notes"
+                    placeholder="Add a quick note for the quoting team"
+                    test-id="dialog-notes-textarea"
+                />
+            </div>
+        </div>
+    </AppDialog>
 </template>
 
 <script setup>
-import { computed, reactive } from 'vue';
+import { computed, reactive, ref } from 'vue';
 
 import CheckboxField from '../components/forms/CheckboxField.vue';
+import AppDialog from '../components/overlays/AppDialog.vue';
 import DateField from '../components/forms/DateField.vue';
 import DataTableView from '../components/tables/DataTableView.vue';
 import FileUploadField from '../components/forms/FileUploadField.vue';
@@ -194,6 +247,7 @@ import SelectField from '../components/forms/SelectField.vue';
 import TextareaField from '../components/forms/TextareaField.vue';
 import TextField from '../components/forms/TextField.vue';
 import AppLayout from '../layouts/AppLayout.vue';
+import Button from 'primevue/button';
 
 const form = reactive({
     customerName: '',
@@ -207,6 +261,14 @@ const form = reactive({
     requiresInstallation: true,
     heroImage: null,
     galleryImages: [],
+});
+
+const isDialogOpen = ref(false);
+
+const dialogForm = reactive({
+    customer: '',
+    reference: '',
+    notes: '',
 });
 
 const productOptions = [

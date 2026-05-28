@@ -180,3 +180,39 @@ body {
     color: var(--text-secondary);
     border-top: 1px solid var(--border-subtle);
 }
+
+.app-dialog.p-dialog {
+    border: 1px solid var(--border-strong);
+    background: var(--surface-primary);
+    color: var(--text-primary);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 24px 80px -40px rgba(15, 23, 42, 0.65);
+}
+
+.app-dialog .p-dialog-header,
+.app-dialog .p-dialog-content,
+.app-dialog .p-dialog-footer {
+    background: transparent;
+    color: inherit;
+}
+
+.app-dialog .p-dialog-header {
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.app-dialog .p-dialog-footer {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.app-dialog .p-dialog-title {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.app-dialog .p-dialog-header-icon {
+    color: var(--text-secondary);
+}
+
+.p-dialog-mask {
+    backdrop-filter: blur(6px);
+}
